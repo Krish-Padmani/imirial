@@ -21,7 +21,8 @@ export default function AdminDashboard() {
 
   const fetchEnquiries = async () => {
     try {
-      const res = await fetch('/api/enquiries', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const res = await fetch(`${apiUrl}/enquiries`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.status === 401 || res.status === 403) {
@@ -40,7 +41,8 @@ export default function AdminDashboard() {
   const deleteEnquiry = async (id) => {
     if (!confirm('Delete this enquiry?')) return;
     try {
-      const res = await fetch(`/api/enquiry/${id}`, {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const res = await fetch(`${apiUrl}/enquiry/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
